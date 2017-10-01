@@ -1,0 +1,29 @@
+#!/bin/bash
+
+function clean  {
+	if [ -e "Main.class" ]
+		then
+		rm floor/*.class
+		rm *.class
+	fi
+}
+function make {
+	clean
+	javac *.java
+}
+case $@ in
+	"")
+	if [ -e "Main.class" ] 
+		then java Main
+	else
+		make
+		java Main
+	fi 
+	;;
+	"c")
+	clean
+	;;
+	"m")
+	make
+	;;
+esac
