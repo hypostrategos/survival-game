@@ -2,9 +2,20 @@ package floor;
 
 public class Tile {
 	public int id;
-	public boolean traversable;
+	public boolean traversable=false;
 	public Tile(int id) {
+		Level.rand.nextInt(10);
 		this.id = id;
-		System.out.println(id);
 	}
+	public void setTraversable(boolean traversable) {
+		this.traversable=traversable;
+	}
+
+    @Override
+    public String toString() {
+        return id+
+        " "+traversable+
+        ((id+1)%Level.tileWidth==0?"\n":" ")
+        ;
+    }
 }

@@ -4,6 +4,7 @@ function clean  {
 	if [ -e "Main.class" ]
 		then
 		rm floor/*.class
+		rm display/*.class
 		rm *.class
 	fi
 }
