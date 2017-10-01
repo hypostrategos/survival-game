@@ -13,8 +13,7 @@ public class Tile {
 
     @Override
     public String toString() {
-        return id+
-        " "+traversable+
+        return (traversable?id:"  ")+
         ((id+1)%Level.tileWidth==0?"\n":" ")
         ;
     }
