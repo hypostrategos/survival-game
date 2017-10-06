@@ -1,21 +1,32 @@
 package floor;
+import java.util.*;
 
 public class Room {
-	private final int roomSize=4;
+	private final int maxRoomSize=20;
+	private int roomSize;
+	private int origin;
+	// private Set<Integer> tiles = new HashSet<>();
 
-	public Room(int[] tileList) {
-		int origin;
-		while (tileList[origin=Level.rand.nextInt(tileList.length)]!=1) {
-			tileList[origin]=1;
-			break;
+	public Room(int[] tileList, List<Room> roomList) {
+		roomSize=Math.min(Level.rand.nextInt(maxRoomSize-2)+3, Level.tileWidth);
+		while (tileList[origin]!=0) {
+			origin=Level.rand.nextInt(tileList.length);
 		}
+
 		int x=0, y=0;
+		int xMin = origin%Level.tileWidth, yMin = origin/Level.tileWidth;
+		int maxWidth = Level.tileWidth-1; int maxHeight = Level.totalTiles/Level.tileWidth-1;
+		int tile=0;
+
 		for (int j=0; j<roomSize; j++) {
-			y=Math.min((origin+j*Level.tileWidth),Level.totalTiles/Level.tileWidth);
+			y = Math.min(yMin+j, maxHeight);
 			for (int i=0; i<roomSize; i++) {
-				x=Math.min((origin+i),Level.tileWidth-1);
-				tileList[x+y-origin]=1;
-				System.out.println(x+" "+y);
+				x = Math.min(xMin+i, maxWidth);
+				tile = x+y*Level.tileWidth;
+				if (i==0||j==0||x==maxWidth||y==maxHeight||i==roomSize-1||j==roomSize-1)
+					tileList[tile]=2;
+				else 
+					tileList[tile]=1;
 			}
 		}
 	}

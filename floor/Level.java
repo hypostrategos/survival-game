@@ -3,10 +3,10 @@ import java.util.*;
 import java.util.stream.*;
 
 public class Level {
-	public static final int totalTiles = 100;
-	public static final int tileWidth = 10;
+	public static final int totalTiles = 2500;
+	public static final int tileWidth = 50;
 	public static int lowestFloor = 0;
-	public static int numberOfRooms = 2;
+	public static int numberOfRooms = 10;
 	public static Random rand = new Random();
 	
 	private int[] tileList;
@@ -21,11 +21,11 @@ public class Level {
 		tileList = new int[totalTiles];
 		roomList = new ArrayList<>(numberOfRooms);
 		for (int i=0;i<numberOfRooms;i++) {
-			roomList.add(new Room(tileList));
+			roomList.add(new Room(tileList, roomList));
 		}
-		Arrays.stream(tileList)
-		.forEach(System.out::println);
-
+		for (int i=0; i<tileList.length;i++) {
+			System.out.print(tileList[i]+(i%tileWidth==tileWidth-1?"\n":""));
+		}
 		// Stream.iterate(0, x->x+1)
 		// .limit(totalTiles)
 		// .forEach(x->tileList.add(new Tile(x)));
@@ -53,6 +53,8 @@ public class Level {
 
 	// 	return path;
 	// }
-	public void layout(int size) {
-	}
+	// @Override
+ //    public String toString() {
+        
+ //    }
 }
